@@ -2,6 +2,7 @@ package com.userservice.serviceimpl;
 
 import com.userservice.entity.UserEntity;
 import com.userservice.entity.taskClient.Task;
+import com.userservice.services.circuitBreaker.TaskServiceCircuitBreaker;
 import com.userservice.services.taskClient.TaskClient;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class UserServiceImplementation implements UserServce {
     @Autowired
     private TaskClient taskClient;
 
+    @Autowired
+    private TaskServiceCircuitBreaker taskServiceCircuitBreaker;
+
     @Override
     public UserEntity add(UserEntity user) {
         return userRepository.save(user);
@@ -32,11 +36,13 @@ public class UserServiceImplementation implements UserServce {
 
     @Override
     public Task updateTaskStatus(int taskId, Task task) {
-        return taskClient.updateTaskStatus(taskId, task);
+        //return taskClient.updateTaskStatus(taskId, task);
+        return taskServiceCircuitBreaker.updateTaskStatus(taskId, task);
     }
 
     @Override
     public Task addNewTask(Task task) {
         return taskClient.saveTaskDetails(task);
+        //return taskServiceCircuitBreaker.saveTaskDetails(task);
     }
 }
