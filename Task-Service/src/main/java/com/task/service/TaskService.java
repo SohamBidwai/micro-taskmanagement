@@ -24,6 +24,4 @@ public interface TaskService {
     //update task details only by admin or Team Leader
     Task updateTaskDetails(int taskId, Task task);
 
-
-
 }
