@@ -80,15 +80,18 @@ public class UserController {
         return "Credentials Invalid !!";
     }
 
-    //Following are the Requests are only for user(Team Leader)
+    //Following Request only for user(Service Engineer)
     @PutMapping("/taskStatus/{id}")
     public Task updateTaskStatus(@PathVariable int id, @RequestBody Task task){
         return userServce.updateTaskStatus(id, task);
     }
 
+    //Following Request only for user(admin and Team Leader)
     @PostMapping("/addTask")
     public Task addNewTask(@RequestBody Task task){
         return userServce.addNewTask(task);
     }
+
+    
 
 }
