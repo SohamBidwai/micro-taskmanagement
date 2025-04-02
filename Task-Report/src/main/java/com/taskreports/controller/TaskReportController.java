@@ -3,11 +3,9 @@ package com.taskreports.controller;
 import com.taskreports.entity.Task;
 import com.taskreports.service.TaskReportService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,8 +16,17 @@ public class TaskReportController {
     private TaskReportService taskReportService;
 
     @GetMapping("/allTaskStatus")
-    public List<Task> getAllTaskStatus(){
-        return taskReportService.getAllTaskStatus();
+    public List<Task> getAllTaskStatus(@RequestBody Task task){
+
+        List<Task> getFillteredData = new ArrayList<>();
+
+        if(!task.getStatus().equals("")){
+            String status = task.getStatus();
+            getFillteredData = taskReportService.getAllTaskStatusFillteredData(status);
+        }else{
+            getFillteredData = taskReportService.getAllTaskStatus();
+        }
+        return getFillteredData;
     }
 
     @GetMapping("/getUserTaskPerformance/{id}")
