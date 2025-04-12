@@ -30,7 +30,7 @@ public class SecurityConfiguration {
         http.csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/user/login","/user/saveUser").permitAll()
+                        .requestMatchers("/user/login","/user/saveUser","/user/getCreaterPerson/**").permitAll()
                         .requestMatchers("/user/addTask").hasAnyRole("admin", "Team Leader") // Only Admin and Team Leader can access
                         .requestMatchers("/user/taskStatus/**").hasAnyRole("Service Engineer") // Only Admin and Team Leader can access
                         .requestMatchers("/user/**").authenticated()

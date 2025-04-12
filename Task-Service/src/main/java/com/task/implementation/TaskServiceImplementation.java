@@ -21,7 +21,8 @@ public class TaskServiceImplementation implements TaskService {
     @Override
     public void add(Task task) {
         taskRepository.save(task);
-        String message = "Task is created and assign to "+task.getAssignToId();
+
+        String message = "Task is created by admin or Team Leader and assign to you.";
         taskNotificationProducer.sendNotification(message);
     }
 
