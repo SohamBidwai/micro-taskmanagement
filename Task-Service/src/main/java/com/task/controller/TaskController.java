@@ -16,12 +16,14 @@ public class TaskController {
     private TaskService taskService;
 
     @PostMapping("/addTask")
-    public Task saveTaskDetails(@RequestBody Task task){
+    public String saveTaskDetails(@RequestBody Task task){
 
         Date todayDate = new Date();
         task.setCreatedOn(todayDate);
 
-        return taskService.add(task);
+        taskService.add(task);
+
+        return "success";
     }
 
     @GetMapping("/getSpecificTask/{id}")

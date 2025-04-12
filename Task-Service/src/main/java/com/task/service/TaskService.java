@@ -7,7 +7,7 @@ import java.util.List;
 public interface TaskService {
 
     //save
-    Task add(Task task);
+    void add(Task task);
 
     //get by task id
     Task getTaskById(int taskId);

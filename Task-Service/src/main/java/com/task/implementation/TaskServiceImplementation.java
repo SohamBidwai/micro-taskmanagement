@@ -1,6 +1,7 @@
 package com.task.implementation;
 
 import com.task.entity.Task;
+import com.task.notification.TaskNotificationProducer;
 import com.task.repository.TaskRepository;
 import com.task.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,14 @@ public class TaskServiceImplementation implements TaskService {
     @Autowired
     private TaskRepository taskRepository;
 
+    @Autowired
+    private TaskNotificationProducer taskNotificationProducer;
+
     @Override
-    public Task add(Task task) {
-        return taskRepository.save(task);
+    public void add(Task task) {
+        taskRepository.save(task);
+        String message = "Task is created and assign to "+task.getAssignToId();
+        taskNotificationProducer.sendNotification(message);
     }
 
     @Override
