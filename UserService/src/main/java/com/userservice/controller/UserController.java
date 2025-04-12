@@ -46,6 +46,11 @@ public class UserController {
         return userServce.get(id);
     }
 
+    @GetMapping("/getCreaterPerson/{id}")
+    public UserEntity getCreaterPerson(@PathVariable int id){
+        return userServce.get(id);
+    }
+
     @PostMapping("/login")
     public ResponseEntity<JWTResponse> login(@RequestBody JWTRequest request) {
 
