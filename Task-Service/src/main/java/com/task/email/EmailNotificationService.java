@@ -11,12 +11,12 @@ public class EmailNotificationService {
     @Autowired
     private JavaMailSender javaMailSender;
 
-    public void sendTaskMailToUser(String senderMailId, String subject, String body){
+    public void sendTaskMailToUser(String senderToMailId, String subject, String body){
 
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom("sohambidwai07@gmail.com");
-        simpleMailMessage.setTo(senderMailId);
-        simpleMailMessage.setCc("sohambidwai7@gmail.com");
+        simpleMailMessage.setFrom("from_mail_id");
+        simpleMailMessage.setTo(senderToMailId);
+        simpleMailMessage.setCc("cc_email_id");
         simpleMailMessage.setSubject(subject);
         simpleMailMessage.setText(body);
 

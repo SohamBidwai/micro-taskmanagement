@@ -36,11 +36,11 @@ public class NotificationConsumer {
     private void sendNotification(String message) {
         // Logic to send email/SMS notification
 
-        String senderMailId = "sohambidwai07@gmail.com";
-        String subject = "New Task Assigned.";
-        String body = "Task is created by admin or Team Leader and assign to you.";
+        String senderToMailId = "to_email_id";
+        String subject = "mail_subject";
+        String body = "mail_message_body";
 
-        emailNotificationService.sendTaskMailToUser(senderMailId, subject, body);
+        emailNotificationService.sendTaskMailToUser(senderToMailId, subject, body);
         
         System.out.println("Sending notification: " + message);
     }
