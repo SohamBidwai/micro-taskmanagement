@@ -3,6 +3,8 @@ package com.userservice.entity;
 import com.userservice.entity.taskClient.Task;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class UserEntity {
 
@@ -23,7 +25,7 @@ public class UserEntity {
     @Column(name = "role")
     private String role;
 
-    transient private Task task;
+    transient private List<Task> task;
 
     public int getUserId() {
         return userId;
@@ -65,11 +67,11 @@ public class UserEntity {
         this.role = role;
     }
 
-    public Task getTask() {
+    public List<Task> getTask() {
         return task;
     }
 
-    public void setTask(Task task) {
+    public void setTask(List<Task> task) {
         this.task = task;
     }
 

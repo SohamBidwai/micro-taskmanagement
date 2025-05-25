@@ -5,6 +5,8 @@ import com.userservice.entity.taskClient.Task;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 //To Check Authentication of an FeignClient, so Used following line.
 @FeignClient(name = "Task-Service", url = "http://localhost:9094", configuration = FeignClientConfig.class)
 
@@ -18,5 +20,8 @@ public interface TaskClient {
 
     @PostMapping("/task/addTask")
     Task saveTaskDetails(@RequestBody Task task);
+
+    @GetMapping("/task/userAllTask/{assignToId}")
+    public List<Task> getAllTaskAgainstUser(@PathVariable int assignToId);
 
 }

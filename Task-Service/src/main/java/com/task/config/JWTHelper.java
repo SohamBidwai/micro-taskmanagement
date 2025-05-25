@@ -1,16 +1,14 @@
-package com.userservice.config;
+package com.task.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 @Component
@@ -74,6 +72,16 @@ public class JWTHelper {
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = getUsernameFromToken(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    }
+
+    public String extractUsername(String token) {
+        return getClaimsFromToken(token, Claims::getSubject);
+    }
+
+    public UserDetails extractUserDetails(String token) {
+        Claims claims = getAllClaimsFromToken(token);
+        List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(claims.get("role").toString()));
+        return new org.springframework.security.core.userdetails.User(claims.getSubject(), "", authorities);
     }
 
 

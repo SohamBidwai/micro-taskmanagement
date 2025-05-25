@@ -10,6 +10,8 @@ import com.userservice.repository.UserRepository;
 import com.userservice.services.UserServce;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class UserServiceImplementation implements UserServce {
@@ -31,6 +33,9 @@ public class UserServiceImplementation implements UserServce {
     @Override
     public UserEntity get(int id) {
         UserEntity getUser = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User Not Found"));
+
+        getUser.setTask(taskClient.getAllTaskAgainstUser(getUser.getUserId()));
+
         return getUser;
     }
 
